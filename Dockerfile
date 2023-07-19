@@ -5,9 +5,9 @@ ENV NODE_ENV development
 
 COPY package.json /starter/package.json
 
-Run sudo add-apt-repository ppa:deadsnakes/ppa
-Run sudo apt-get update
-Run sudo apt install python3.7
+Run add-apt-repository ppa:deadsnakes/ppa
+Run apt-get update
+Run apt install python3.7
 
 RUN npm install pm2 -g
 RUN npm install --production
