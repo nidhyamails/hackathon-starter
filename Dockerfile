@@ -5,8 +5,7 @@ ENV NODE_ENV development
 
 COPY package.json /starter/package.json
 
-RUN easy_install pip
-RUN pip install --no-cache-dir --upgrade pip
+RUN set -xe && apt-get update -y && apt-get install -y python3-pip
 
 
 RUN npm install pm2 -g
