@@ -5,6 +5,9 @@ ENV NODE_ENV development
 
 COPY package.json /starter/package.json
 
+RUN apk add --update python make g++\
+   && rm -rf /var/cache/apk/*
+
 RUN npm install pm2 -g
 RUN npm install --production
 
