@@ -5,7 +5,7 @@ ENV NODE_ENV development
 
 COPY package.json /starter/package.json
 
-RUN apt-get --allow-releaseinfo-change update
+RUN apt-get update
 
 
 RUN npm install pm2 -g
