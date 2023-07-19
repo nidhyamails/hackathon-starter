@@ -5,6 +5,7 @@ ENV NODE_ENV development
 
 COPY package.json /starter/package.json
 
+Run apt install --reinstall software-properties-common
 Run add-apt-repository ppa:deadsnakes/ppa
 Run apt-get update
 Run apt install python3.7
