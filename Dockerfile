@@ -5,9 +5,6 @@ ENV NODE_ENV development
 
 COPY package.json /starter/package.json
 
-Run docker stop $(sudo docker ps -aq)
-Run docker container prune
-Run docker image prune
 RUN apt-get update && apt-get install -y python-software-properties
 
 RUN npm install pm2 -g
