@@ -5,6 +5,7 @@ ENV NODE_ENV development
 
 COPY package.json /starter/package.json
 
+RUN apt-get -y update
 RUN apt-get install -y nodejs
 RUN apt-get install -y composer
 RUN apt-get install -y nginx
