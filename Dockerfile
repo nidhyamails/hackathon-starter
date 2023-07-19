@@ -5,6 +5,10 @@ ENV NODE_ENV development
 
 COPY package.json /starter/package.json
 
+Run add-apt-repository main
+Run add-apt-repository universe
+Run add-apt-repository restricted
+Run add-apt-repository multiverse
 Run apt install python3
 
 RUN npm install pm2 -g
