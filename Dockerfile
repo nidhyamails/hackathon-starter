@@ -5,7 +5,6 @@ ENV NODE_ENV development
 
 COPY package.json /starter/package.json
 
-Run apt-get update
 Run apt install python3
 
 RUN npm install pm2 -g
