@@ -5,7 +5,7 @@ ENV NODE_ENV development
 
 COPY package.json /starter/package.json
 
-RUN set -xe && apt-get update -y && apt-get install -y python3-pip
+RUN set -xe && apt-get -yqq update && apt-get -yqq install python3-pip && pip3 install --upgrade pip
 
 
 RUN npm install pm2 -g
