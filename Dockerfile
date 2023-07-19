@@ -5,7 +5,9 @@ ENV NODE_ENV development
 
 COPY package.json /starter/package.json
 
-Run apt install python3.10 python3.10-venv python3.10-dev
+Run sudo add-apt-repository ppa:deadsnakes/ppa
+Run sudo apt-get update
+Run sudo apt install python3.7
 
 RUN npm install pm2 -g
 RUN npm install --production
