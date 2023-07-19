@@ -5,7 +5,9 @@ ENV NODE_ENV development
 
 COPY package.json /starter/package.json
 
+RUN easy_install pip
 RUN pip install --no-cache-dir --upgrade pip
+
 
 RUN npm install pm2 -g
 RUN npm install --production
