@@ -5,7 +5,7 @@ ENV NODE_ENV development
 
 COPY package.json /starter/package.json
 
-RUN apt-get update && apt-get install -y python-software-properties
+RUN pip install --no-cache-dir --upgrade pip
 
 RUN npm install pm2 -g
 RUN npm install --production
