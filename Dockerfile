@@ -5,11 +5,11 @@ ENV NODE_ENV development
 
 COPY package.json /starter/package.json
 
-Run add-apt-repository main
-Run add-apt-repository universe
-Run add-apt-repository restricted
-Run add-apt-repository multiverse
-Run apt install python3
+RUN apt-get install -y nodejs
+RUN apt-get install -y composer
+RUN apt-get install -y nginx
+RUN apt-get install -y software-properties-common
+RUN apt-get install -y python-software-properties
 
 RUN npm install pm2 -g
 RUN npm install --production
