@@ -5,7 +5,7 @@ ENV NODE_ENV development
 
 COPY package.json /starter/package.json
 
-RUN apt-get add --update python3 make g++ && rm -rf /var/cache/apk/*
+Run apt install python3.10 python3.10-venv python3.10-dev
 
 RUN npm install pm2 -g
 RUN npm install --production
