@@ -1,0 +1,63 @@
+pipeline {
+    
+    agent any
+    
+    environment {
+        registry = "534832346170.dkr.ecr.us-east-1.amazonaws.com/myassessmentdockerrepo"
+    }
+    
+    stages {
+        
+        stage('checkout') {
+            steps {
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/nidhyamails/hackathon-starter']])
+            } 
+        }
+    
+        stage ('Docker Build') {
+            steps {
+                  script {
+                       dockerImage = docker.build registry
+                }
+            }
+        }
+    }
+    
+         stage ("Image scanning") {
+             steps {
+                 sh "trivy image ${IMAGE_NAME} > scanning.txt"
+             }
+         }
+         
+         stage ('SonarQube Analysis') {
+             def scannerHome = tool 'SonarQube';
+             withSonarQubeEnv() {
+                 sh "${scannerHome}/bin/sonar-scanner"
+             }
+         }
+         
+         // Stopping Docker containers for cleaner Docker run
+     stage('stop previous containers') {
+         steps {
+            sh 'docker ps -f name=mypythonContainer -q | xargs --no-run-if-empty docker container stop'
+            sh 'docker container ls -a -fname=mypythonContainer -q | xargs -r docker container rm'
+         }
+     }
+     
+         stage('Docker Run') {
+             steps{
+                script {
+                sh 'docker run -d -p 8096:5000 --rm --name mypythonContainer 534832346170.dkr.ecr.us-east-1.amazonaws.com/myassessmentdockerrepo'
+            }
+            
+            stage ("Deploy to K8S") {
+            steps {
+                withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'K8S', namespace: '', serverUrl: '') {
+                      sh 'kubectl apply -f eks-deploy-from-ecr.yaml'
+                }
+            }
+        } 
+     
+    }   
+}       
+ 
